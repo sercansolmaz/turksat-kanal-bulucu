@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Türksat Kanal ve Frekans Bulucu 2026 — Kanal Adıyla Frekans Arama | Türksat 42°E</title>
-  <meta name="description" content="Türksat 42° doğu kanal listesi: kanal adını yazın, frekans, polarizasyon (V/H), sembol oranı ve FEC değerini anında bulun. Show TV, TRT 1, Kanal D, ATV ve 200+ kanalın 2026 güncel frekans bilgileri, manuel tarama rehberi.">
+  <meta name="description" content="Türksat 42° doğu kanal listesi: kanal adını yazın, frekans, polarizasyon (V/H), sembol oranı ve FEC değerini anında bulun. Show TV, TRT 1, Kanal D, ATV ve 200+ kanalın 2026 güncel frekans bilgileri, favoriler ve manuel tarama rehberi.">
   <meta name="keywords" content="türksat frekans listesi, türksat kanal bulucu, türksat frekans arama, kanal frekans bulma, türksat 42 doğu, manuel tarama, sembol oranı, polarizasyon, türksat 4a frekansları, türksat 5b, radyo frekansları">
   <meta name="author" content="our editorial team">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -18,12 +18,12 @@
   <meta property="og:site_name" content="Türksat Bulucu">
   <meta property="og:locale" content="tr_TR">
   <meta property="og:title" content="Türksat Kanal ve Frekans Bulucu 2026 — Kanal Adıyla Frekans Arama">
-  <meta property="og:description" content="Kanal adını yazın; frekans, polarizasyon, sembol oranı ve FEC değerini anında görün. 200+ Türksat kanalı, güncel 2026 frekans listesi ve manuel tarama rehberi.">
+  <meta property="og:description" content="Kanal adını yazın; frekans, polarizasyon, sembol oranı ve FEC değerini anında görün. 200+ Türksat kanalı, favoriler, güncel 2026 frekans listesi ve manuel tarama rehberi.">
   <meta property="og:url" content="https://turksat.sercansolmaz.com/">
   <meta property="og:image" content="https://turksat.sercansolmaz.com/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Türksat Kanal ve Frekans Bulucu 2026">
-  <meta name="twitter:description" content="Kanal adını yaz, frekans ayarını hemen bul. Türksat 42° doğu güncel kanal frekansları.">
+  <meta name="twitter:description" content="Kanal adını yaz, ayarını hemen bul. Türksat 42° doğu güncel kanal frekansları, favoriler.">
   <meta name="twitter:image" content="https://turksat.sercansolmaz.com/og.png">
   <style>
 :root {
@@ -50,10 +50,6 @@ main { min-height: 100vh; overflow: hidden; }
 .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-size: 15px; font-weight: 800; letter-spacing: -.02em; }
 .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--ink); color: white; font-size: 17px; }
 .source-link { font-size: 13px; font-weight: 700; color: var(--muted); text-decoration: none; border-bottom: 1px solid #bcc8d8; padding-bottom: 3px; }
-.topbar-links { display: flex; align-items: center; gap: 20px; }
-.author-link { font-size: 13px; font-weight: 700; color: var(--blue); text-decoration: none; border-bottom: 1px solid #b9d0f0; padding-bottom: 3px; white-space: nowrap; }
-.author-link:hover { color: var(--blue-dark); }
-.author-short { display: none; }
 
 .hero { position: relative; width: min(1180px, calc(100% - 40px)); margin: 12px auto 0; padding: 64px; border-radius: 34px; background: radial-gradient(circle at 92% 10%, #2a75df 0, transparent 34%), linear-gradient(135deg, #061b3d 0%, #09326f 54%, #0d54b6 100%); color: white; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(420px, .95fr); gap: 64px; align-items: center; box-shadow: 0 30px 80px rgba(5, 32, 76, .18); }
 .hero::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.09); border-radius: 24px; pointer-events: none; }
@@ -74,9 +70,6 @@ main { min-height: 100vh; overflow: hidden; }
 .quick-list { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 13px; }
 .quick-list button { border: 1px solid rgba(255,255,255,.19); background: rgba(255,255,255,.08); color: white; padding: 8px 11px; border-radius: 999px; font-size: 11px; font-weight: 700; }
 .quick-list button:hover { background: white; color: var(--blue-dark); }
-.search-meta { margin: 13px 2px 0; padding: 9px 13px; border-radius: 11px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.14); color: #c3d6ef; font-size: 11.5px; font-weight: 600; line-height: 1.45; }
-.search-meta b { color: white; font-weight: 800; }
-.search-meta.none { color: #ffc9c9; background: rgba(255,120,120,.08); border-color: rgba(255,120,120,.2); }
 
 .network-card { width: min(1040px, calc(100% - 60px)); margin: -28px auto 0; position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 22px; padding: 22px 28px; border-radius: 21px; background: var(--lime); box-shadow: 0 17px 40px rgba(52, 78, 12, .16); }
 .network-icon { width: 48px; height: 48px; border-radius: 15px; background: var(--ink); display: flex; align-items: end; justify-content: center; gap: 3px; padding: 13px; }
@@ -143,10 +136,6 @@ footer p { margin: 0; max-width: 610px; }
   .topbar, .hero, .results-section, .howto, footer { width: min(100% - 24px, 1180px); }
   .topbar { height: 66px; }
   .source-link { font-size: 0; }.source-link span { font-size: 17px; }
-  .topbar-links { gap: 12px; }
-  .author-link { font-size: 0; }
-  .author-link > span { font-size: 13px; }
-  .author-full { display: none; }.author-short { display: inline; }
   .hero { margin-top: 4px; padding: 34px 20px 46px; border-radius: 24px; gap: 30px; }
   .hero::after { inset: 10px; border-radius: 17px; }
   .hero h1 { font-size: 43px; }
@@ -175,6 +164,50 @@ footer p { margin: 0; max-width: 610px; }
   footer { flex-direction: column; gap: 10px; }
 }
 
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+/* Self-hosted v2: compact counters and browser-based favorites */
+.hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+.hero-copy, .finder { min-width: 0; max-width: 100%; }
+.finder { width: 100%; margin-left: 0; margin-right: 0; }
+.search-wrap, .quick-list, .finder-stats { min-width: 0; max-width: 100%; }
+.finder-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+.finder-stats > div { min-width: 0; padding: 11px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 13px; background: rgba(4,23,56,.22); }
+.finder-stats span { display: block; overflow: hidden; color: #bdd2ed; font-size: 9px; font-weight: 800; letter-spacing: .09em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.finder-stats strong { display: block; margin-top: 3px; color: white; font-size: 21px; line-height: 1; letter-spacing: -.03em; }
+.finder-stats .matched { border-color: rgba(201,243,91,.45); background: rgba(201,243,91,.12); }
+.finder-stats .matched span, .finder-stats .matched strong { color: var(--lime); }
+.results-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.match-badge { display: inline-flex; align-items: center; min-height: 28px; margin-top: 8px; padding: 0 10px; border-radius: 999px; background: #e8f1ff; color: var(--blue); font-size: 10px; font-weight: 900; white-space: nowrap; }
+.card-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.favorite-button { width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 9px; background: white; color: #8090a4; font-size: 17px; line-height: 1; }
+.favorite-button:hover { border-color: #efb600; color: #d49600; }
+.favorite-button.active { border-color: #f1ca49; background: #fff7cf; color: #c88600; }
+.filters button[data-filter="Favoriler"] span { display: inline-block; min-width: 17px; margin-left: 3px; padding: 2px 5px; border-radius: 999px; background: #edf1f6; color: #586b82; font-size: 9px; }
+.filters button[data-filter="Favoriler"].active span { background: rgba(255,255,255,.16); color: white; }
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 38px; padding: 48px; }
+  .finder { width: 100%; }
+}
+@media (max-width: 640px) {
+  .source-link { max-width: 132px; overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+  .source-link span { font-size: 13px; }
+  .hero { padding: 34px 20px 46px; }
+  .finder { width: 100%; margin: 0; }
+  .finder-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 13px; }
+  .finder-stats > div { padding: 9px 7px; border-radius: 11px; }
+  .finder-stats span { font-size: 7px; letter-spacing: .06em; }
+  .finder-stats strong { font-size: 18px; }
+  .filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .filters button { min-width: 0; padding: 9px 4px; font-size: 10px; }
+  .copy-button { padding: 7px 8px; }
+}
+@media (max-width: 360px) {
+  .finder-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .source-link { max-width: 105px; }
+}
+
+/* SEO sections (FAQ + popular searches) */
 .faq-list { margin-top: 26px; display: grid; gap: 10px; }
 .faq-list details { border: 1px solid var(--line); border-radius: 16px; background: white; overflow: hidden; }
 .faq-list summary { cursor: pointer; list-style: none; padding: 17px 20px; font-size: 15px; font-weight: 800; letter-spacing: -.01em; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
@@ -194,8 +227,6 @@ footer p { margin: 0; max-width: 610px; }
   .seo-faq { padding: 26px 18px; }
   .faq-list summary { font-size: 14px; }
 }
-
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
   </style>
 </head>
 <body>
@@ -205,16 +236,9 @@ footer p { margin: 0; max-width: 610px; }
         <span class="brand-mark" aria-hidden="true">T</span>
         <span>Türksat Bulucu</span>
       </a>
-      <div class="topbar-links">
-        <a class="author-link" href="https://sercansolmaz.com" target="_blank" rel="noreferrer" title="Sercan Solmaz — sercansolmaz.com">
-          <span class="author-full">Sercan Solmaz tarafından hazırlanmıştır</span>
-          <span class="author-short">Sercan Solmaz</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-        <a class="source-link" href="https://www.turksat.com.tr/uydu/yayincilik-hizmetleri/turksat-frekans-listesi" target="_blank" rel="noreferrer">
-          Resmî kaynak <span aria-hidden="true">↗</span>
-        </a>
-      </div>
+      <a class="source-link" href="https://sercansolmaz.com" target="_blank" rel="noreferrer">
+        Sercan Solmaz <span aria-hidden="true">↗</span>
+      </a>
     </header>
 
     <section class="hero" id="top">
@@ -232,7 +256,12 @@ footer p { margin: 0; max-width: 610px; }
           <button class="clear" id="clear-search" aria-label="Aramayı temizle" hidden>×</button>
         </div>
         <div class="quick-list" id="quick-list" aria-label="Hızlı aramalar"></div>
-        <p class="search-meta" id="search-meta" aria-live="polite"></p>
+        <div class="finder-stats" aria-label="Kanal istatistikleri">
+          <div><span>Toplam</span><strong id="stat-total">0</strong></div>
+          <div><span>TV</span><strong id="stat-tv">0</strong></div>
+          <div><span>Radyo</span><strong id="stat-radio">0</strong></div>
+          <div class="matched"><span>Eşleşen</span><strong id="stat-matched">0</strong></div>
+        </div>
       </div>
     </section>
 
@@ -250,12 +279,16 @@ footer p { margin: 0; max-width: 610px; }
       <div class="results-head">
         <div>
           <span class="section-label">ARAMA SONUÇLARI</span>
-          <h2 id="results-title">Öne çıkan kanallar</h2>
+          <div class="results-title-row">
+            <h2 id="results-title">Öne çıkan kanallar</h2>
+            <span class="match-badge" id="match-badge">0 eşleşme</span>
+          </div>
         </div>
         <div class="filters" id="filters" aria-label="Yayın türü filtresi">
           <button class="active" data-filter="Tümü" aria-pressed="true">Tümü</button>
           <button data-filter="TV" aria-pressed="false">TV</button>
           <button data-filter="Radyo" aria-pressed="false">Radyo</button>
+          <button data-filter="Favoriler" aria-pressed="false">★ Favoriler <span id="favorite-filter-count">0</span></button>
         </div>
       </div>
       <div class="results-grid" id="results-grid"></div>
@@ -288,7 +321,7 @@ footer p { margin: 0; max-width: 610px; }
       <div class="faq-list">
         <details>
           <summary>Türksat kanal frekansı nasıl bulunur?</summary>
-          <p>Yukarıdaki arama kutusuna kanal adını (örn. “Show TV”, “TRT 1”) veya doğrudan frekans değerini (örn. “12380”) yazın. Kanalın frekansı (MHz), polarizasyonu (V/H), sembol oranı ve FEC değeri anında listelenir. Birden fazla yayın kaydı olan kanallarda tüm ayarlar birlikte gösterilir.</p>
+          <p>Yukarıdaki arama kutusuna kanal adını (örn. “Show TV”, “TRT 1”) veya doğrudan frekans değerini (örn. “12380”) yazın. Kanalın frekansı (MHz), polarizasyonu (V/H), sembol oranı ve FEC değeri anında listelenir. Sık kullandığınız kanalları yıldız simgesiyle favorilere ekleyebilirsiniz.</p>
         </details>
         <details>
           <summary>Türksat genel şebeke arama (ağ tarama) ayarları nedir?</summary>
@@ -305,6 +338,10 @@ footer p { margin: 0; max-width: 610px; }
         <details>
           <summary>Polarizasyon V ve H ne demek, nasıl girilir?</summary>
           <p>V (Dikey) ve H (Yatay), sinyalin aktarılma yönünü belirtir. Manuel tarama ekranında frekansla birlikte bu değer girilir; yanlış polarizasyon seçilirse kanal bulunmaz. Arama sonuçlarında her kanalın doğru polarizasyonu “V · Dikey” veya “H · Yatay” olarak gösterilir.</p>
+        </details>
+        <details>
+          <summary>Favoriler hangi cihazda saklanıyor?</summary>
+          <p>Favoriler yıldız simgesiyle işaretlediğiniz kanalları tarayıcınızın yerel deposunda (localStorage) saklar; sunucuya gönderilmez ve hesap gerektirmez. Aynı tarayıcıda kalıcıdır, farklı cihaz veya tarayıcıya taşınmaz.</p>
         </details>
         <details>
           <summary>Bu sitedeki frekans listesi güncel mi?</summary>
@@ -343,7 +380,20 @@ footer p { margin: 0; max-width: 610px; }
   <script>
     "use strict";
     const SITE_DATA = {"muxes":[{"frequency":"11225","polarization":"V","symbolRate":"30000","fec":"3/4","coverage":"Batı","satellite":"Türksat 5B","services":[{"name":"Halk TV HD","aliases":["Halk TV"],"quality":"HD"},{"name":"Yıldız En TV"},{"name":"TVNET"},{"name":"TV5"}]},{"frequency":"11425","polarization":"V","symbolRate":"30000","fec":"3/4","coverage":"Batı","satellite":"Türksat 5B","services":[{"name":"Çay TV"},{"name":"Rehber TV"}]},{"frequency":"11794","polarization":"V","symbolRate":"30000","fec":"3/4","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"TRT 1 HD","aliases":["TRT1"],"quality":"HD"},{"name":"TRT Çocuk HD","quality":"HD"},{"name":"TRT Belgesel HD","quality":"HD"},{"name":"TRT Spor HD","quality":"HD"},{"name":"TRT Genç"},{"name":"TRT Diyanet Çocuk"}]},{"frequency":"11807","polarization":"H","symbolRate":"10000","fec":"3/4","coverage":"Doğu","satellite":"Türksat 4A","services":[{"name":"Disney Junior"},{"name":"FX HD","quality":"HD"},{"name":"Nat Geo HD","aliases":["National Geographic"],"quality":"HD"},{"name":"Wild HD","aliases":["Nat Geo Wild"],"quality":"HD"}]},{"frequency":"11825","polarization":"V","symbolRate":"4444","fec":"3/4","coverage":"Batı","satellite":"Türksat","services":[{"name":"Türkmeneli TV"}]},{"frequency":"11833","polarization":"V","symbolRate":"7500","fec":"Otomatik","coverage":"Batı","satellite":"Türksat","services":[{"name":"ATV Avrupa"},{"name":"A Haber"},{"name":"A News"}]},{"frequency":"11862","polarization":"V","symbolRate":"16666","fec":"Otomatik","coverage":"Batı","satellite":"Türksat","services":[{"name":"24 TV"},{"name":"360 TV"},{"name":"TV4"}]},{"frequency":"11886","polarization":"V","symbolRate":"10833","fec":"2/3","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"NOW HD","aliases":["FOX TV","NOW TV"],"quality":"HD"}]},{"frequency":"11901","polarization":"V","symbolRate":"12500","fec":"2/3","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"TV8 HD","aliases":["TV 8"],"quality":"HD"},{"name":"TV8.5 HD","aliases":["TV 8.5"],"quality":"HD"}]},{"frequency":"11957","polarization":"V","symbolRate":"27500","fec":"5/6","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"TRT 1","aliases":["TRT1"]},{"name":"TRT Haber"},{"name":"TRT 2 HD","quality":"HD"},{"name":"TRT Avaz HD","quality":"HD"},{"name":"TRT Müzik"},{"name":"TRT 3 Spor"},{"name":"TRT Spor Yıldız"},{"name":"TRT FM","type":"Radyo"},{"name":"TRT Nağme","type":"Radyo"},{"name":"TRT Türkü","type":"Radyo"},{"name":"Radyo 1","type":"Radyo"},{"name":"Radyo 3","type":"Radyo"}]},{"frequency":"11996","polarization":"V","symbolRate":"27500","fec":"3/4","coverage":"Batı","satellite":"Türksat 4A","services":[{"name":"Beyaz TV HD","quality":"HD"},{"name":"Bengü Türk HD","aliases":["BengüTürk"],"quality":"HD"},{"name":"KRT TV HD","aliases":["KRT"],"quality":"HD"},{"name":"Kon TV HD","quality":"HD"},{"name":"Akit TV HD","quality":"HD"},{"name":"Kanal 3 HD","quality":"HD"},{"name":"Kanal 32"},{"name":"TV 264","aliases":["tv264"]},{"name":"TV 52"},{"name":"TV Kayseri"},{"name":"Ordu Altaş TV"},{"name":"Egemax TV"},{"name":"Ekin Türk TV"},{"name":"Bir TV"},{"name":"Ribat FM","type":"Radyo"}]},{"frequency":"12015","polarization":"H","symbolRate":"27500","fec":"3/4","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"Star TV HD","aliases":["Star TV"],"quality":"HD"},{"name":"NTV HD","aliases":["NTV"],"quality":"HD"},{"name":"TLC HD","quality":"HD"},{"name":"TLC"},{"name":"DMAX HD","quality":"HD"},{"name":"DMAX"},{"name":"NTV Radyo","type":"Radyo"},{"name":"Kral FM","type":"Radyo"},{"name":"Kral Pop","type":"Radyo"}]},{"frequency":"12034","polarization":"V","symbolRate":"27500","fec":"3/4","coverage":"Batı","satellite":"Türksat 4A","services":[{"name":"CNN Türk HD","aliases":["CNN TURK"],"quality":"HD"},{"name":"Tele 1 HD","aliases":["TELE1"],"quality":"HD"},{"name":"Haber Global HD","quality":"HD"},{"name":"TV8 Int HD","aliases":["TV8 International"],"quality":"HD"},{"name":"D Anadolu"},{"name":"ASF TV"},{"name":"CNN Türk Radyo","type":"Radyo"},{"name":"SlowTürk","type":"Radyo"},{"name":"Radyo D","type":"Radyo"},{"name":"45'lik","type":"Radyo"},{"name":"Kalp FM","type":"Radyo"}]},{"frequency":"12111","polarization":"V","symbolRate":"27500","fec":"3/4","coverage":"Batı","satellite":"Türksat 6A","services":[{"name":"Koza TV HD","aliases":["Koza TV"],"quality":"HD"},{"name":"Radyo 7","type":"Radyo"},{"name":"NEO"},{"name":"Alikhbaria TV"},{"name":"Edessa TV"},{"name":"Kanal 7 Avrupa HD","aliases":["Kanal 7 Avrupa"],"quality":"HD"},{"name":"SZC"},{"name":"Flash Haber HD","aliases":["Flash Haber"],"quality":"HD"},{"name":"Ülke TV HD","aliases":["Ülke TV"],"quality":"HD"},{"name":"Zarok TV"},{"name":"Sercem TV"},{"name":"EuroStar","aliases":["Euro Star"]}]},{"frequency":"12149","polarization":"V","symbolRate":"27500","fec":"3/4","coverage":"Batı","satellite":"Türksat 6A","services":[{"name":"TGRT EU"},{"name":"TGRT Haber"},{"name":"Kanal B"},{"name":"TRT EBA"},{"name":"BRT 3"},{"name":"Gonca TV"}]},{"frequency":"12206","alternate":"12207","polarization":"H","symbolRate":"27500","fec":"3/4","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"ATV HD","aliases":["ATV"],"quality":"HD"},{"name":"A Haber HD","quality":"HD"},{"name":"A Spor HD","quality":"HD"},{"name":"A2 HD","quality":"HD"},{"name":"A Para HD","quality":"HD"},{"name":"VAV TV"},{"name":"Minika GO"},{"name":"Minika Çocuk"},{"name":"Radyo Turkuvaz","type":"Radyo"},{"name":"A Haber Radyo","type":"Radyo"},{"name":"A Spor Radyo","type":"Radyo"},{"name":"VAV Radyo","type":"Radyo"}]},{"frequency":"12226","polarization":"V","symbolRate":"27500","fec":"3/4","coverage":"Batı","satellite":"Türksat 4A","services":[{"name":"TRT 1 HD","quality":"HD"},{"name":"TRT Haber HD","quality":"HD"},{"name":"TRT Spor HD","quality":"HD"},{"name":"TRT Çocuk HD","quality":"HD"},{"name":"TRT Müzik HD","quality":"HD"},{"name":"TRT Türk HD","quality":"HD"},{"name":"TRT World HD","quality":"HD"},{"name":"TRT Kürdi"}]},{"frequency":"12245","polarization":"H","symbolRate":"27500","fec":"5/6","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"Kanal D HD","aliases":["Kanal D"],"quality":"HD"},{"name":"TV 2 HD","aliases":["teve2","teve 2"],"quality":"HD"},{"name":"Dream Türk HD","quality":"HD"},{"name":"Cartoon Network","aliases":["Carton Network"]},{"name":"CNN International"},{"name":"CNBC-e","aliases":["CNBC E"]},{"name":"NHK World-Japan"},{"name":"Lider Haber HD","quality":"HD"},{"name":"BBC Earth HD","quality":"HD"},{"name":"Eurosport 1"},{"name":"Eurosport 2 HD","quality":"HD"},{"name":"Kocaeli TV"},{"name":"T.A.Y. TV","aliases":["TAY TV"]}]},{"frequency":"12302","polarization":"V","symbolRate":"27500","fec":"3/4","coverage":"Türkiye","satellite":"Türksat 4A","services":[{"name":"Show TV HD","aliases":["Show TV"],"quality":"HD"},{"name":"Habertürk HD","aliases":["Haberturk"],"quality":"HD"},{"name":"Bloomberg HT HD","quality":"HD"},{"name":"HT Spor"},{"name":"Show Max HD","quality":"HD"},{"name":"Kanal 1"},{"name":"Habertürk Radyo","type":"Radyo"},{"name":"HT Spor Radyo","type":"Radyo"}]},{"frequency":"12344","polarization":"V","symbolRate":"30000","fec":"2/3","coverage":"Batı","satellite":"Türksat 4A","services":[{"name":"Ekotürk HD","quality":"HD"},{"name":"Ekol TV HD","quality":"HD"},{"name":"Agro TV"},{"name":"Tek Rumeli TV"},{"name":"Van TV"},{"name":"HT Spor"}]},{"frequency":"12380","alternate":"12379","polarization":"V","symbolRate":"27500","fec":"3/4","coverage":"Türkiye-Batı","satellite":"Türksat 4A","network":true,"services":[{"name":"TGRT Haber HD","aliases":["TGRT Haber"],"quality":"HD"},{"name":"TGRT Belgesel HD","aliases":["TGRT Belgesel"],"quality":"HD"},{"name":"Diyanet TV HD","aliases":["Diyanet TV"],"quality":"HD"},{"name":"Halk TV","quality":"SD"},{"name":"Space Toon Türkiye","aliases":["STOON TV","Space Toon"],"quality":"HD"},{"name":"Türkiye Polis Radyosu","aliases":["Polis Radyosu"],"type":"Radyo"},{"name":"Diyanet Radyo","type":"Radyo"},{"name":"Diyanet Kur'an Radyo","aliases":["Kuran Radyo"],"type":"Radyo"},{"name":"Diyanet Risalet Radyo","type":"Radyo"},{"name":"Küpe FM","type":"Radyo"},{"name":"Best FM","type":"Radyo"},{"name":"Karadeniz FM","type":"Radyo"},{"name":"Bayram FM","type":"Radyo"},{"name":"Radyo 2000","type":"Radyo"},{"name":"TGRT FM","type":"Radyo"},{"name":"Sahil Güvenlik Radyosu","type":"Radyo"}]},{"frequency":"12422","polarization":"V","symbolRate":"27500","fec":"2/3","coverage":"Batı","satellite":"Türksat 4A","services":[{"name":"TürkHaber"},{"name":"Kanal Urfa"},{"name":"Güneydoğu TV"},{"name":"Kardelen TV"},{"name":"Lâlegül TV","aliases":["Lalegül TV"]},{"name":"Line TV"},{"name":"Meltem TV"},{"name":"Ulusal 1 TV","aliases":["Ulusal Kanal"]},{"name":"Kadırga TV"},{"name":"FM TV"},{"name":"HRT TV"},{"name":"GRT"},{"name":"Radyo Spor","type":"Radyo"},{"name":"Lâlegül FM","aliases":["Lalegül FM"],"type":"Radyo"}]},{"frequency":"12458","alternate":"12457","polarization":"V","symbolRate":"30000","fec":"2/3","coverage":"Batı","satellite":"Türksat 4A","services":[{"name":"BRT 1 HD","quality":"HD"},{"name":"BRT 2 HD","quality":"HD"},{"name":"Kıbrıs TV HD","quality":"HD"},{"name":"Türksat Tanıtım HD","quality":"HD"},{"name":"Kanal T"},{"name":"NR1 Türk TV HD","aliases":["Number 1 Türk"],"quality":"HD"},{"name":"Kudüs TV"},{"name":"Pati TV"},{"name":"Kanal 33"},{"name":"Genç TV"},{"name":"Ada TV"},{"name":"Kanal Avrupa"},{"name":"NR1 Türk FM","aliases":["Number 1 Türk FM"],"type":"Radyo"},{"name":"Kıbrıs FM","type":"Radyo"}]}],"featured":["Show TV","Kanal D","TRT 1","ATV","TV8","NOW","Halk TV"]};
-    const state = { query: "", filter: "Tümü", copied: null };
+    const FAVORITES_KEY = "turksat-channel-favorites-v1";
+
+    function loadFavorites() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+        return new Set(Array.isArray(saved) ? saved : []);
+      } catch (_) { return new Set(); }
+    }
+
+    function saveFavorites(favorites) {
+      try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(favorites))); } catch (_) {}
+    }
+
+    const state = { query: "", filter: "Tümü", copied: null, favorites: loadFavorites() };
 
     function normalize(value) {
       return value.toLocaleLowerCase("tr-TR").normalize("NFD")
@@ -363,13 +413,20 @@ footer p { margin: 0; max-width: 610px; }
         const search = normalize([service.name].concat(service.aliases || [], mux.frequency, mux.alternate || "").join(" "));
         return Object.assign({}, service, { type: type, mux: mux, search: search });
       });
-    }).map(function (channel, index) { channel.id = index; return channel; });
+    }).map(function (channel, index) {
+      channel.id = index;
+      channel.key = normalize(channel.name) + "|" + channel.mux.frequency;
+      return channel;
+    });
 
     const searchInput = document.getElementById("channel-search");
     const clearButton = document.getElementById("clear-search");
     const resultsGrid = document.getElementById("results-grid");
     const emptyState = document.getElementById("empty-state");
     const resultsTitle = document.getElementById("results-title");
+    const totalCount = channels.length;
+    const tvCount = channels.filter(function (channel) { return channel.type === "TV"; }).length;
+    const radioCount = channels.filter(function (channel) { return channel.type === "Radyo"; }).length;
 
     document.getElementById("quick-list").innerHTML = SITE_DATA.featured.map(function (item) {
       return '<button data-query="' + escapeHtml(item) + '">' + escapeHtml(item) + '</button>';
@@ -383,11 +440,13 @@ footer p { margin: 0; max-width: 610px; }
       const quality = channel.quality ? '<span class="quality-badge">' + escapeHtml(channel.quality) + '</span>' : "";
       const network = mux.network ? '<span class="network-badge">Şebeke</span>' : "";
       const copied = state.copied === channel.id;
+      const favorite = state.favorites.has(channel.key);
       return '<article class="channel-card">' +
         '<div class="channel-top"><div><div class="badges">' +
         '<span class="type-badge ' + (isRadio ? "radio" : "") + '">' + escapeHtml(channel.type) + '</span>' + quality + network +
-        '</div><h3>' + escapeHtml(channel.name) + '</h3></div>' +
-        '<button class="copy-button" data-copy="' + channel.id + '" aria-label="' + escapeHtml(channel.name) + ' ayarlarını kopyala">' + (copied ? "Kopyalandı" : "Kopyala") + '</button></div>' +
+        '</div><h3>' + escapeHtml(channel.name) + '</h3></div><div class="card-actions">' +
+        '<button class="favorite-button ' + (favorite ? "active" : "") + '" data-favorite="' + channel.id + '" aria-label="' + escapeHtml(channel.name) + (favorite ? ' kanalını favorilerden çıkar' : ' kanalını favorilere ekle') + '" aria-pressed="' + favorite + '">' + (favorite ? "★" : "☆") + '</button>' +
+        '<button class="copy-button" data-copy="' + channel.id + '" aria-label="' + escapeHtml(channel.name) + ' ayarlarını kopyala">' + (copied ? "Kopyalandı" : "Kopyala") + '</button></div></div>' +
         '<div class="frequency-line"><strong>' + escapeHtml(mux.frequency) + '</strong><span>MHz</span>' + alternate + '</div>' +
         '<dl class="setting-grid">' +
         '<div><dt>Polarizasyon</dt><dd><b>' + escapeHtml(mux.polarization) + '</b> · ' + polarization + '</dd></div>' +
@@ -400,52 +459,36 @@ footer p { margin: 0; max-width: 610px; }
     function getMatches() {
       const needle = normalize(state.query);
       return channels.filter(function (channel) {
-        return (state.filter === "Tümü" || channel.type === state.filter) && (!needle || channel.search.includes(needle));
+        const typeMatch = state.filter === "Tümü" || channel.type === state.filter;
+        const favoriteMatch = state.filter !== "Favoriler" || state.favorites.has(channel.key);
+        return (state.filter === "Favoriler" ? favoriteMatch : typeMatch) && (!needle || channel.search.includes(needle));
       });
-    }
-
-    function getResults() {
-      return getMatches().slice(0, state.query ? 40 : 12);
-    }
-
-    const TOTAL = channels.length;
-    const TOTAL_TV = channels.filter(function (c) { return c.type === "TV"; }).length;
-    const TOTAL_RADIO = TOTAL - TOTAL_TV;
-
-    function updateMeta(matchCount) {
-      const meta = document.getElementById("search-meta");
-      const q = escapeHtml(state.query);
-      if (!state.query) {
-        meta.classList.remove("none");
-        if (state.filter === "Tümü") {
-          meta.innerHTML = "Listede toplam <b>" + TOTAL + "</b> kanal: <b>" + TOTAL_TV + "</b> TV · <b>" + TOTAL_RADIO + "</b> radyo";
-        } else {
-          const n = state.filter === "TV" ? TOTAL_TV : TOTAL_RADIO;
-          meta.innerHTML = "Listede <b>" + n + "</b> " + state.filter.toLowerCase() + " kanalı · toplam " + TOTAL + " kanal";
-        }
-        return;
-      }
-      if (matchCount === 0) {
-        meta.classList.add("none");
-        meta.innerHTML = "“<b>" + q + "</b>” için eşleşen kanal yok — toplam " + TOTAL + " kanal arasında. Yazımı kısaltmayı deneyin.";
-        return;
-      }
-      meta.classList.remove("none");
-      let text = "“<b>" + q + "</b>” için <b>" + matchCount + "</b> eşleşen kanal";
-      if (state.filter !== "Tümü") text += " · " + state.filter + " filtresi";
-      if (matchCount > 40) text += " · ilk 40 gösteriliyor";
-      meta.innerHTML = text;
     }
 
     function render() {
       const matches = getMatches();
-      const results = matches.slice(0, state.query ? 40 : 12);
-      updateMeta(matches.length);
+      const results = !state.query && state.filter === "Tümü" ? matches.slice(0, 12) : matches;
       clearButton.hidden = !state.query;
-      resultsTitle.textContent = state.query ? "“" + state.query + "” için " + results.length + " sonuç" : "Öne çıkan kanallar";
+      if (state.filter === "Favoriler" && !state.query) resultsTitle.textContent = "Favori kanalların";
+      else if (state.query) resultsTitle.textContent = "“" + state.query + "” sonuçları";
+      else if (state.filter !== "Tümü") resultsTitle.textContent = state.filter + " kanalları";
+      else resultsTitle.textContent = "Öne çıkan kanallar";
+      document.getElementById("stat-total").textContent = totalCount;
+      document.getElementById("stat-tv").textContent = tvCount;
+      document.getElementById("stat-radio").textContent = radioCount;
+      document.getElementById("stat-matched").textContent = matches.length;
+      document.getElementById("match-badge").textContent = matches.length + " eşleşme";
+      document.getElementById("favorite-filter-count").textContent = state.favorites.size;
       resultsGrid.innerHTML = results.map(cardHtml).join("");
       resultsGrid.hidden = results.length === 0;
       emptyState.hidden = results.length !== 0;
+      if (state.filter === "Favoriler" && state.favorites.size === 0) {
+        emptyState.querySelector("h3").textContent = "Henüz favori kanalın yok.";
+        emptyState.querySelector("p").textContent = "Kanal kartlarındaki yıldız simgesine dokunarak favori ekleyebilirsin.";
+      } else {
+        emptyState.querySelector("h3").textContent = "Bu aramayla eşleşen kanal bulunamadı.";
+        emptyState.querySelector("p").textContent = "Yazımı kısaltarak deneyin: “TRT”, “Haber”, “Kanal” gibi.";
+      }
       document.querySelectorAll("[data-filter]").forEach(function (button) {
         const active = button.dataset.filter === state.filter;
         button.classList.toggle("active", active);
@@ -471,6 +514,15 @@ footer p { margin: 0; max-width: 610px; }
       if (!button) return; state.filter = button.dataset.filter; render();
     });
     resultsGrid.addEventListener("click", async function (event) {
+      const favoriteButton = event.target.closest("[data-favorite]");
+      if (favoriteButton) {
+        const channel = channels[Number(favoriteButton.dataset.favorite)];
+        if (state.favorites.has(channel.key)) state.favorites.delete(channel.key);
+        else state.favorites.add(channel.key);
+        saveFavorites(state.favorites);
+        render();
+        return;
+      }
       const button = event.target.closest("[data-copy]");
       if (!button) return;
       const channel = channels[Number(button.dataset.copy)];
@@ -516,7 +568,7 @@ footer p { margin: 0; max-width: 610px; }
         "operatingSystem": "Web",
         "inLanguage": "tr-TR",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "featureList": "Kanal adıyla frekans arama, polarizasyon (V/H), sembol oranı, FEC, kapsama alanı ve uydu bilgisi; şebeke arama ayarları; TV ve radyo filtresi; tek tıkla ayar kopyalama"
+        "featureList": "Kanal adıyla frekans arama, polarizasyon (V/H), sembol oranı, FEC, kapsama alanı ve uydu bilgisi; TV/radyo/favori filtreleri; tarayıcıda favori saklama; tek tıkla ayar kopyalama"
       },
       {
         "@type": "FAQPage",
@@ -525,7 +577,7 @@ footer p { margin: 0; max-width: 610px; }
           {
             "@type": "Question",
             "name": "Türksat kanal frekansı nasıl bulunur?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Arama kutusuna kanal adını (örn. Show TV, TRT 1) veya doğrudan frekans değerini (örn. 12380) yazın. Kanalın frekansı (MHz), polarizasyonu (V/H), sembol oranı ve FEC değeri anında listelenir. Birden fazla yayın kaydı olan kanallarda tüm ayarlar birlikte gösterilir." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Arama kutusuna kanal adını (örn. Show TV, TRT 1) veya doğrudan frekans değerini (örn. 12380) yazın. Kanalın frekansı (MHz), polarizasyonu (V/H), sembol oranı ve FEC değeri anında listelenir. Sık kullanılan kanallar yıldız simgesiyle favorilere eklenebilir." }
           },
           {
             "@type": "Question",
@@ -546,6 +598,11 @@ footer p { margin: 0; max-width: 610px; }
             "@type": "Question",
             "name": "Polarizasyon V ve H ne demek, nasıl girilir?",
             "acceptedAnswer": { "@type": "Answer", "text": "V (Dikey) ve H (Yatay), sinyalin aktarılma yönünü belirtir. Manuel tarama ekranında frekansla birlikte bu değer girilir; yanlış polarizasyon seçilirse kanal bulunmaz. Arama sonuçlarında her kanalın doğru polarizasyonu V · Dikey veya H · Yatay olarak gösterilir." }
+          },
+          {
+            "@type": "Question",
+            "name": "Favoriler hangi cihazda saklanıyor?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Favoriler yıldız simgesiyle işaretlediğiniz kanalları tarayıcınızın yerel deposunda (localStorage) saklar; sunucuya gönderilmez ve hesap gerektirmez. Aynı tarayıcıda kalıcıdır, farklı cihaz veya tarayıcıya taşınmaz." }
           },
           {
             "@type": "Question",
