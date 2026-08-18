@@ -101,6 +101,8 @@ main { min-height: 100vh; overflow: hidden; }
 .type-badge, .quality-badge, .network-badge { display: inline-flex; align-items: center; height: 21px; padding: 0 7px; border-radius: 6px; font-size: 9px; font-weight: 900; letter-spacing: .08em; }
 .type-badge { background: #e8f1ff; color: #0755c7; }.type-badge.radio { background: #fff1df; color: #a04b00; }.quality-badge { background: #edf3f8; color: #52657d; }.network-badge { background: #e8f8b9; color: #476c00; }
 .channel-card h3 { margin: 8px 0 0; font-size: 18px; letter-spacing: -.025em; }
+.channel-card h3 a, .detail-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #b7c6da; }
+.channel-card h3 a:hover { color: var(--blue); border-color: var(--blue); }
 .copy-button { border: 1px solid var(--line); background: white; color: #4d627c; border-radius: 9px; padding: 7px 9px; font-size: 10px; font-weight: 800; }
 .copy-button:hover { border-color: var(--blue); color: var(--blue); }
 .frequency-line { display: flex; align-items: baseline; gap: 6px; margin: 12px 0 17px; }
@@ -231,6 +233,16 @@ footer p { margin: 0; max-width: 610px; }
   .faq-list summary { font-size: 14px; }
 }
 
+/* Detail filter chips */
+.filter-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin: -10px 0 22px; }
+.chips-label { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.chip { border: 1px solid var(--line); background: white; color: #4d627c; padding: 7px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 800; transition: all .15s ease; }
+.chip:hover { border-color: var(--blue); color: var(--blue); }
+.chip.active { background: var(--ink); border-color: var(--ink); color: white; }
+.chip-sep { width: 1px; height: 18px; background: var(--line); }
+.chip-clear { border: 0; background: transparent; color: #c0392b; font-size: 11px; font-weight: 800; padding: 7px 4px; cursor: pointer; text-decoration: underline; }
+@media (max-width: 640px) { .chips-label { display: none; } .chip-sep { display: none; } }
+
 /* Live trending searches */
 .trending { width: min(1180px, calc(100% - 40px)); margin: 0 auto 70px; padding: 45px; border-radius: 28px; background: var(--ink); color: white; }
 .trending .seo-head .section-label { color: #8dbbff; }
@@ -312,6 +324,22 @@ footer p { margin: 0; max-width: 610px; }
           <button data-filter="Radyo" aria-pressed="false">Radyo</button>
           <button data-filter="Favoriler" aria-pressed="false">★ Favoriler <span id="favorite-filter-count">0</span></button>
         </div>
+      </div>
+      <div class="filter-chips" id="filter-chips" aria-label="Detaylı filtreler">
+        <span class="chips-label">Filtrele:</span>
+        <button class="chip" data-chip="quality" data-value="HD">HD</button>
+        <button class="chip" data-chip="quality" data-value="SD">SD</button>
+        <span class="chip-sep" aria-hidden="true"></span>
+        <button class="chip" data-chip="satellite" data-value="Türksat 4A">4A</button>
+        <button class="chip" data-chip="satellite" data-value="Türksat 5B">5B</button>
+        <button class="chip" data-chip="satellite" data-value="Türksat 6A">6A</button>
+        <span class="chip-sep" aria-hidden="true"></span>
+        <button class="chip" data-chip="coverage" data-value="Türkiye">Türkiye</button>
+        <button class="chip" data-chip="coverage" data-value="Batı">Batı</button>
+        <button class="chip" data-chip="coverage" data-value="Doğu">Doğu</button>
+        <span class="chip-sep" aria-hidden="true"></span>
+        <button class="chip" data-chip="network" data-value="1">Şebeke arama</button>
+        <button class="chip-clear" id="chip-clear" hidden>Tümünü temizle ×</button>
       </div>
       <div class="results-grid" id="results-grid"></div>
       <div class="empty-state" id="empty-state" hidden>
@@ -402,6 +430,15 @@ footer p { margin: 0; max-width: 610px; }
       <p class="trending-note">Bu liste site ziyaretçilerinin aramalarından otomatik oluşur; yalnızca arama terimi sayılır, kimlik bilgisi saklanmaz.</p>
     </section>
 
+    <section class="trending topfavs" id="topfavs" hidden>
+      <div class="seo-head">
+        <span class="section-label">CANLI · ZİYARETÇİ FAVORİLERİ</span>
+        <h2>En çok favorilenen kanallar</h2>
+      </div>
+      <ol class="trending-list" id="topfavs-list" aria-label="En çok favorilenen kanallar"></ol>
+      <p class="trending-note">Ziyaretçilerin yıldızla işaretlediği kanallar anonim olarak sayılır; kimse kimin neyi favorilediğini göremez.</p>
+    </section>
+
     <footer>
       <p><strong>Not:</strong> Frekanslar zamanla değişebilir. Kritik işlemlerde resmî Türksat listesini kontrol edin.</p>
       <span>Bağımsız yardımcı araç · Veriler 18.08.2026 tarihinde kontrol edildi.</span>
@@ -424,7 +461,7 @@ footer p { margin: 0; max-width: 610px; }
       try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(favorites))); } catch (_) {}
     }
 
-    const state = { query: "", filter: "Tümü", copied: null, favorites: loadFavorites() };
+    const state = { query: "", filter: "Tümü", copied: null, favorites: loadFavorites(), chips: {} };
 
     function normalize(value) {
       return value.toLocaleLowerCase("tr-TR").normalize("NFD")
@@ -463,6 +500,16 @@ footer p { margin: 0; max-width: 610px; }
       return '<button data-query="' + escapeHtml(item) + '">' + escapeHtml(item) + '</button>';
     }).join("");
 
+    const DETAIL_PAGES = {"a-haber":"A Haber","a-spor-hd":"A Spor HD","atv-hd":"ATV HD","bloomberg-ht-hd":"Bloomberg HT HD","cartoon-network":"Cartoon Network","cnn-turk-hd":"CNN Türk HD","disney-junior":"Disney Junior","diyanet-tv-hd":"Diyanet TV HD","eurosport-1":"Eurosport 1","eurosport-2-hd":"Eurosport 2 HD","flash-haber-hd":"Flash Haber HD","haberturk-hd":"Habertürk HD","halk-tv":"Halk TV","ht-spor":"HT Spor","kanal-d-hd":"Kanal D HD","kral-fm":"Kral FM","kral-pop":"Kral Pop","minika-cocuk":"Minika Çocuk","minika-go":"Minika GO","nat-geo-hd":"Nat Geo HD","now-hd":"NOW HD","ntv-hd":"NTV HD","show-tv-hd":"Show TV HD","space-toon-turkiye":"Space Toon Türkiye","star-tv-hd":"Star TV HD","tgrt-haber":"TGRT Haber","trt-1-hd":"TRT 1 HD","trt-3-spor":"TRT 3 Spor","trt-cocuk-hd":"TRT Çocuk HD","trt-spor-hd":"TRT Spor HD","trt-spor-yildiz":"TRT Spor Yıldız","tv-2-hd":"TV 2 HD","tv8-5-hd":"TV8.5 HD","tv8-hd":"TV8 HD","tv8-int-hd":"TV8 Int HD","ulke-tv-hd":"Ülke TV HD","dream-turk-hd":"Dream Türk HD"};
+
+    function detailSlug(name) {
+      const n = normalize(name).replace(/ hd$| sd$/,"");
+      for (const slug in DETAIL_PAGES) {
+        if (normalize(DETAIL_PAGES[slug]).replace(/ hd$| sd$/,"") === n) return slug;
+      }
+      return null;
+    }
+
     function cardHtml(channel) {
       const mux = channel.mux;
       const isRadio = channel.type === "Radyo";
@@ -472,10 +519,12 @@ footer p { margin: 0; max-width: 610px; }
       const network = mux.network ? '<span class="network-badge">Şebeke</span>' : "";
       const copied = state.copied === channel.id;
       const favorite = state.favorites.has(channel.key);
+      const detail = detailSlug(channel.name);
+      const nameHtml = detail ? '<a class="detail-link" href="/kanal/' + detail + '/">' + escapeHtml(channel.name) + '</a>' : escapeHtml(channel.name);
       return '<article class="channel-card">' +
         '<div class="channel-top"><div><div class="badges">' +
         '<span class="type-badge ' + (isRadio ? "radio" : "") + '">' + escapeHtml(channel.type) + '</span>' + quality + network +
-        '</div><h3>' + escapeHtml(channel.name) + '</h3></div><div class="card-actions">' +
+        '</div><h3>' + nameHtml + '</h3></div><div class="card-actions">' +
         '<button class="favorite-button ' + (favorite ? "active" : "") + '" data-favorite="' + channel.id + '" aria-label="' + escapeHtml(channel.name) + (favorite ? ' kanalını favorilerden çıkar' : ' kanalını favorilere ekle') + '" aria-pressed="' + favorite + '">' + (favorite ? "★" : "☆") + '</button>' +
         '<button class="copy-button" data-copy="' + channel.id + '" aria-label="' + escapeHtml(channel.name) + ' ayarlarını kopyala">' + (copied ? "Kopyalandı" : "Kopyala") + '</button></div></div>' +
         '<div class="frequency-line"><strong>' + escapeHtml(mux.frequency) + '</strong><span>MHz</span>' + alternate + '</div>' +
@@ -487,12 +536,21 @@ footer p { margin: 0; max-width: 610px; }
         '<div class="satellite-row"><span>' + escapeHtml(mux.satellite) + '</span><span>42° Doğu</span></div></article>';
     }
 
+    function chipMatch(channel) {
+      const c = state.chips;
+      if (c.quality && (channel.quality || "") !== c.quality) return false;
+      if (c.satellite && channel.mux.satellite.indexOf(c.satellite) === -1) return false;
+      if (c.coverage && channel.mux.coverage.indexOf(c.coverage) === -1) return false;
+      if (c.network && !channel.mux.network) return false;
+      return true;
+    }
+
     function getMatches() {
       const needle = normalize(state.query);
       return channels.filter(function (channel) {
         const typeMatch = state.filter === "Tümü" || channel.type === state.filter;
         const favoriteMatch = state.filter !== "Favoriler" || state.favorites.has(channel.key);
-        return (state.filter === "Favoriler" ? favoriteMatch : typeMatch) && (!needle || channel.search.includes(needle));
+        return (state.filter === "Favoriler" ? favoriteMatch : typeMatch) && (!needle || channel.search.includes(needle)) && chipMatch(channel);
       });
     }
 
@@ -544,13 +602,30 @@ footer p { margin: 0; max-width: 610px; }
       const button = event.target.closest("[data-filter]");
       if (!button) return; state.filter = button.dataset.filter; render();
     });
+    document.getElementById("filter-chips").addEventListener("click", function (event) {
+      const chip = event.target.closest("[data-chip]");
+      if (chip) {
+        const key = chip.dataset.chip, value = chip.dataset.value;
+        if (state.chips[key] === value) delete state.chips[key];
+        else state.chips[key] = value;
+      } else if (event.target.closest("#chip-clear")) {
+        state.chips = {};
+      } else return;
+      document.getElementById("chip-clear").hidden = Object.keys(state.chips).length === 0;
+      document.querySelectorAll("[data-chip]").forEach(function (c) {
+        c.classList.toggle("active", state.chips[c.dataset.chip] === c.dataset.value);
+      });
+      render();
+    });
     resultsGrid.addEventListener("click", async function (event) {
       const favoriteButton = event.target.closest("[data-favorite]");
       if (favoriteButton) {
         const channel = channels[Number(favoriteButton.dataset.favorite)];
-        if (state.favorites.has(channel.key)) state.favorites.delete(channel.key);
+        const wasFavorite = state.favorites.has(channel.key);
+        if (wasFavorite) state.favorites.delete(channel.key);
         else state.favorites.add(channel.key);
         saveFavorites(state.favorites);
+        trackEvent("/fav", { channel: channel.name }, !wasFavorite);
         render();
         return;
       }
@@ -559,38 +634,44 @@ footer p { margin: 0; max-width: 610px; }
       const channel = channels[Number(button.dataset.copy)];
       const mux = channel.mux;
       const text = channel.name + ": " + mux.frequency + " MHz · " + mux.polarization + " (" + (mux.polarization === "V" ? "Dikey" : "Yatay") + ") · " + mux.symbolRate + " · FEC " + mux.fec;
+      trackEvent("/select", { q: state.query || channel.name, channel: channel.name });
       try { await copyText(text); state.copied = channel.id; render(); setTimeout(function () { state.copied = null; render(); }, 1600); } catch (_) {}
     });
 
     render();
 
-    /* ---------- Live search trends (Cloudflare Worker + KV) ---------- */
-    (function () {
-      const TRENDS_API = "https://turksat-trends.sercansolmaz.workers.dev";
-      const MIN_TRACK_LEN = 3;
+    /* ---------- Analytics hub (Cloudflare Worker + KV) ---------- */
+    const TRENDS_API = "https://turksat-trends.sercansolmaz.workers.dev";
+    const MIN_TRACK_LEN = 3;
 
-      // debounce: report the term once typing pauses
+    function trackEvent(path, payload) {
+      try {
+        fetch(TRENDS_API + path, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        }).catch(function () {});
+      } catch (_) {}
+    }
+
+    // debounce: report the term once typing pauses
+    (function () {
       let trackTimer = null;
       let lastTracked = "";
-      function trackTerm(q) {
-        const term = q.trim();
-        if (term.length < MIN_TRACK_LEN || term === lastTracked) return;
-        lastTracked = term;
-        try {
-          fetch(TRENDS_API + "/track", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ q: term }),
-            keepalive: true,
-          }).catch(function () {});
-        } catch (_) {}
-      }
       searchInput.addEventListener("input", function () {
         clearTimeout(trackTimer);
-        trackTimer = setTimeout(function () { trackTerm(searchInput.value); }, 1200);
+        trackTimer = setTimeout(function () {
+          const term = searchInput.value.trim();
+          if (term.length < MIN_TRACK_LEN || term === lastTracked) return;
+          lastTracked = term;
+          trackEvent("/track", { q: term });
+        }, 1200);
       });
+    })();
 
-      // render live trending list (top 10)
+    // render live trending + top favorites
+    (function () {
       function renderTrending(items) {
         if (!items || !items.length) return;
         const list = document.getElementById("trending-list");
@@ -602,10 +683,22 @@ footer p { margin: 0; max-width: 610px; }
         }).join("");
         document.getElementById("trending").hidden = false;
       }
+      function renderTopFavs(items) {
+        if (!items || !items.length) return;
+        const box = document.getElementById("topfavs-list");
+        box.innerHTML = items.slice(0, 8).map(function (item, i) {
+          return '<li><a href="/?q=' + encodeURIComponent(item.c) + '">' +
+            '<span class="rank">' + (i + 1) + '</span>' +
+            '<span class="term">' + escapeHtml(item.c) + '</span>' +
+            '<span class="count">★ ' + item.n + '</span></a></li>';
+        }).join("");
+        document.getElementById("topfavs").hidden = false;
+      }
       try {
         fetch(TRENDS_API + "/top?limit=10").then(function (r) { return r.json(); })
-          .then(function (d) { if (d && d.ok) renderTrending(d.items); })
-          .catch(function () {});
+          .then(function (d) { if (d && d.ok) renderTrending(d.items); }).catch(function () {});
+        fetch(TRENDS_API + "/insights?limit=8").then(function (r) { return r.json(); })
+          .then(function (d) { if (d && d.ok) renderTopFavs(d.favs); }).catch(function () {});
       } catch (_) {}
     })();
 
