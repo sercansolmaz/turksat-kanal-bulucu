@@ -227,6 +227,24 @@ footer p { margin: 0; max-width: 610px; }
   .seo-faq { padding: 26px 18px; }
   .faq-list summary { font-size: 14px; }
 }
+
+/* Live trending searches */
+.trending { width: min(1180px, calc(100% - 40px)); margin: 0 auto 70px; padding: 45px; border-radius: 28px; background: var(--ink); color: white; }
+.trending .seo-head .section-label { color: #8dbbff; }
+.trending .seo-head h2 { color: white; }
+.trending-list { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.trending-list li { min-width: 0; }
+.trending-list a { display: flex; align-items: center; gap: 13px; height: 100%; padding: 13px 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: rgba(255,255,255,.05); text-decoration: none; color: white; font-size: 14.5px; font-weight: 700; transition: background .15s ease, border-color .15s ease; }
+.trending-list a:hover { background: rgba(255,255,255,.12); border-color: rgba(201,243,91,.5); }
+.trending-list .rank { flex-shrink: 0; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 8px; background: rgba(42,117,223,.35); color: #bcd8ff; font-size: 11.5px; font-weight: 900; }
+.trending-list li:nth-child(1) .rank { background: var(--lime); color: var(--ink); }
+.trending-list .term { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.trending-list .count { flex-shrink: 0; color: #8fa6c4; font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+.trending-note { margin: 18px 0 0; color: #7f94b3; font-size: 11px; line-height: 1.5; }
+@media (max-width: 640px) {
+  .trending { padding: 26px 18px; }
+  .trending-list { grid-template-columns: 1fr; }
+}
   </style>
 </head>
 <body>
@@ -369,6 +387,15 @@ footer p { margin: 0; max-width: 610px; }
         <a href="/?q=TGRT">TGRT Haber frekansı</a>
         <a href="/?q=12380">12380 şebeke arama ayarları</a>
       </div>
+    </section>
+
+    <section class="trending" id="trending" hidden>
+      <div class="seo-head">
+        <span class="section-label">CANLI · ZİYARETÇİ ARAMALARI</span>
+        <h2>En çok aranan frekanslar</h2>
+      </div>
+      <ol class="trending-list" id="trending-list" aria-label="En çok aranan kanal ve frekanslar"></ol>
+      <p class="trending-note">Bu liste site ziyaretçilerinin aramalarından otomatik oluşur; yalnızca arama terimi sayılır, kimlik bilgisi saklanmaz.</p>
     </section>
 
     <footer>
@@ -532,6 +559,51 @@ footer p { margin: 0; max-width: 610px; }
     });
 
     render();
+
+    /* ---------- Live search trends (Cloudflare Worker + KV) ---------- */
+    (function () {
+      const TRENDS_API = "https://turksat-trends.sercansolmaz.workers.dev";
+      const MIN_TRACK_LEN = 3;
+
+      // debounce: report the term once typing pauses
+      let trackTimer = null;
+      let lastTracked = "";
+      function trackTerm(q) {
+        const term = q.trim();
+        if (term.length < MIN_TRACK_LEN || term === lastTracked) return;
+        lastTracked = term;
+        try {
+          fetch(TRENDS_API + "/track", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ q: term }),
+            keepalive: true,
+          }).catch(function () {});
+        } catch (_) {}
+      }
+      searchInput.addEventListener("input", function () {
+        clearTimeout(trackTimer);
+        trackTimer = setTimeout(function () { trackTerm(searchInput.value); }, 1200);
+      });
+
+      // render live trending list (top 10)
+      function renderTrending(items) {
+        if (!items || !items.length) return;
+        const list = document.getElementById("trending-list");
+        list.innerHTML = items.slice(0, 10).map(function (item, i) {
+          return '<li><a href="/?q=' + encodeURIComponent(item.q) + '">' +
+            '<span class="rank">' + (i + 1) + '</span>' +
+            '<span class="term">' + escapeHtml(item.q) + '</span>' +
+            '<span class="count">' + item.n + ' arama</span></a></li>';
+        }).join("");
+        document.getElementById("trending").hidden = false;
+      }
+      try {
+        fetch(TRENDS_API + "/top?limit=10").then(function (r) { return r.json(); })
+          .then(function (d) { if (d && d.ok) renderTrending(d.items); })
+          .catch(function () {});
+      } catch (_) {}
+    })();
 
     (function () {
       try {
