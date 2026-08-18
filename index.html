@@ -67,6 +67,9 @@ main { min-height: 100vh; overflow: hidden; }
 .quick-list { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 13px; }
 .quick-list button { border: 1px solid rgba(255,255,255,.19); background: rgba(255,255,255,.08); color: white; padding: 8px 11px; border-radius: 999px; font-size: 11px; font-weight: 700; }
 .quick-list button:hover { background: white; color: var(--blue-dark); }
+.search-meta { margin: 13px 2px 0; padding: 9px 13px; border-radius: 11px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.14); color: #c3d6ef; font-size: 11.5px; font-weight: 600; line-height: 1.45; }
+.search-meta b { color: white; font-weight: 800; }
+.search-meta.none { color: #ffc9c9; background: rgba(255,120,120,.08); border-color: rgba(255,120,120,.2); }
 
 .network-card { width: min(1040px, calc(100% - 60px)); margin: -28px auto 0; position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 22px; padding: 22px 28px; border-radius: 21px; background: var(--lime); box-shadow: 0 17px 40px rgba(52, 78, 12, .16); }
 .network-icon { width: 48px; height: 48px; border-radius: 15px; background: var(--ink); display: flex; align-items: end; justify-content: center; gap: 3px; padding: 13px; }
@@ -211,6 +214,7 @@ footer p { margin: 0; max-width: 610px; }
           <button class="clear" id="clear-search" aria-label="Aramayı temizle" hidden>×</button>
         </div>
         <div class="quick-list" id="quick-list" aria-label="Hızlı aramalar"></div>
+        <p class="search-meta" id="search-meta" aria-live="polite"></p>
       </div>
     </section>
 
@@ -375,15 +379,50 @@ footer p { margin: 0; max-width: 610px; }
         '<div class="satellite-row"><span>' + escapeHtml(mux.satellite) + '</span><span>42° Doğu</span></div></article>';
     }
 
-    function getResults() {
+    function getMatches() {
       const needle = normalize(state.query);
       return channels.filter(function (channel) {
         return (state.filter === "Tümü" || channel.type === state.filter) && (!needle || channel.search.includes(needle));
-      }).slice(0, needle ? 40 : 12);
+      });
+    }
+
+    function getResults() {
+      return getMatches().slice(0, state.query ? 40 : 12);
+    }
+
+    const TOTAL = channels.length;
+    const TOTAL_TV = channels.filter(function (c) { return c.type === "TV"; }).length;
+    const TOTAL_RADIO = TOTAL - TOTAL_TV;
+
+    function updateMeta(matchCount) {
+      const meta = document.getElementById("search-meta");
+      const q = escapeHtml(state.query);
+      if (!state.query) {
+        meta.classList.remove("none");
+        if (state.filter === "Tümü") {
+          meta.innerHTML = "Listede toplam <b>" + TOTAL + "</b> kanal: <b>" + TOTAL_TV + "</b> TV · <b>" + TOTAL_RADIO + "</b> radyo";
+        } else {
+          const n = state.filter === "TV" ? TOTAL_TV : TOTAL_RADIO;
+          meta.innerHTML = "Listede <b>" + n + "</b> " + state.filter.toLowerCase() + " kanalı · toplam " + TOTAL + " kanal";
+        }
+        return;
+      }
+      if (matchCount === 0) {
+        meta.classList.add("none");
+        meta.innerHTML = "“<b>" + q + "</b>” için eşleşen kanal yok — toplam " + TOTAL + " kanal arasında. Yazımı kısaltmayı deneyin.";
+        return;
+      }
+      meta.classList.remove("none");
+      let text = "“<b>" + q + "</b>” için <b>" + matchCount + "</b> eşleşen kanal";
+      if (state.filter !== "Tümü") text += " · " + state.filter + " filtresi";
+      if (matchCount > 40) text += " · ilk 40 gösteriliyor";
+      meta.innerHTML = text;
     }
 
     function render() {
-      const results = getResults();
+      const matches = getMatches();
+      const results = matches.slice(0, state.query ? 40 : 12);
+      updateMeta(matches.length);
       clearButton.hidden = !state.query;
       resultsTitle.textContent = state.query ? "“" + state.query + "” için " + results.length + " sonuç" : "Öne çıkan kanallar";
       resultsGrid.innerHTML = results.map(cardHtml).join("");
