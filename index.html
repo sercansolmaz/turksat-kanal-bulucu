@@ -561,7 +561,17 @@ footer p { margin: 0; max-width: 610px; }
       });
     }
 
+    function syncUrl() {
+      try {
+        const url = new URL(window.location.href);
+        if (state.query) url.searchParams.set("q", state.query);
+        else url.searchParams.delete("q");
+        window.history.replaceState(null, "", url.toString());
+      } catch (_) {}
+    }
+
     function render() {
+      syncUrl();
       const matches = getMatches();
       const results = !state.query && state.filter === "Tümü" ? matches.slice(0, 12) : matches;
       clearButton.hidden = !state.query;
@@ -600,6 +610,12 @@ footer p { margin: 0; max-width: 610px; }
     }
 
     searchInput.addEventListener("input", function () { state.query = searchInput.value; render(); });
+    window.addEventListener("popstate", function () {
+      try {
+        const q = new URLSearchParams(window.location.search).get("q") || "";
+        state.query = q; searchInput.value = q; render();
+      } catch (_) {}
+    });
     clearButton.addEventListener("click", function () { state.query = ""; searchInput.value = ""; searchInput.focus(); render(); });
     document.getElementById("quick-list").addEventListener("click", function (event) {
       const button = event.target.closest("[data-query]");
