@@ -1,0 +1,21 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://turksat.sercansolmaz.com/",
+      "service-doc": [{ "href": "https://turksat.sercansolmaz.com/auth.md", "type": "text/markdown" }],
+      "status": [{ "href": "https://turksat.sercansolmaz.com/health", "type": "text/plain" }],
+      "alternate": [{ "href": "https://turksat.sercansolmaz.com/index.md", "type": "text/markdown" }]
+    },
+    {
+      "anchor": "https://turksat-trends.sercansolmaz.workers.dev/mcp",
+      "service-desc": [{ "href": "https://turksat.sercansolmaz.com/.well-known/mcp/server-card.json", "type": "application/json" }],
+      "service-doc": [{ "href": "https://turksat.sercansolmaz.com/auth.md", "type": "text/markdown" }],
+      "status": [{ "href": "https://turksat-trends.sercansolmaz.workers.dev/top", "type": "application/json" }]
+    },
+    {
+      "anchor": "https://turksat-trends.sercansolmaz.workers.dev/top",
+      "service-desc": [{ "href": "https://turksat.sercansolmaz.com/.well-known/api-catalog", "type": "application/linkset+json" }],
+      "service-doc": [{ "href": "https://turksat.sercansolmaz.com/auth.md", "type": "text/markdown" }]
+    }
+  ]
+}

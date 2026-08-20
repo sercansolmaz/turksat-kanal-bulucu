@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agentskills.io/schemas/v0.2.0/index.json",
+  "skills": [
+    {
+      "name": "search-channel",
+      "type": "api",
+      "description": "Türksat 42° Doğu kanalını ada veya frekansa göre sorgula; frekans, polarizasyon, sembol oranı ve FEC döner.",
+      "url": "https://turksat.sercansolmaz.com/.well-known/agent-skills/search-channel.json",
+      "sha256": "c6285394d732b6c795e42b1d3e4d7dfba5575204e3a4cbc09ac501a9e1481faa"
+    },
+    {
+      "name": "trending-searches",
+      "type": "api",
+      "description": "Site ziyaretçilerinin en çok aradığı kanal/frekans terimlerini döner.",
+      "url": "https://turksat.sercansolmaz.com/.well-known/agent-skills/trending-searches.json",
+      "sha256": "4c67283c33590b751c1b2ccdde41e13db78e25faeb28c3236c272ae092a41ce2"
+    }
+  ]
+}

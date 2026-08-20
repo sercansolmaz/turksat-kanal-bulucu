@@ -1,0 +1,30 @@
+{
+  "name": "trending-searches",
+  "type": "api",
+  "description": "turksat.sercansolmaz.com ziyaretçilerinin en çok aradığı terimler ve en çok favorilenen kanallar. Anonim sayaçlardan oluşur.",
+  "endpoint": "https://turksat-trends.sercansolmaz.workers.dev/top",
+  "transport": "http-get",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "limit": { "type": "integer", "default": 10, "maximum": 25 }
+    }
+  },
+  "output": {
+    "type": "object",
+    "properties": {
+      "ok": { "type": "boolean" },
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "q": { "type": "string" },
+            "n": { "type": "integer" }
+          }
+        }
+      }
+    }
+  },
+  "auth": "none"
+}

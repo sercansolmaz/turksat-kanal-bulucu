@@ -1,0 +1,36 @@
+{
+  "name": "search-channel",
+  "type": "api",
+  "description": "Türksat 42° Doğu kanal sorgulama. Kanal adı (örn. 'Show TV', 'Sözcü', 'TRT 1') veya frekans (örn. '12380') ile çağrılır. Dönen alanlar: name, frequency (MHz), polarization (V/H), symbolRate, fec, satellite, coverage.",
+  "endpoint": "https://turksat-trends.sercansolmaz.workers.dev/mcp",
+  "transport": "http-jsonrpc",
+  "tool": "search_channel",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query": { "type": "string", "description": "Kanal adı veya frekans (MHz)" }
+    },
+    "required": ["query"]
+  },
+  "examples": [
+    { "query": "Show TV" },
+    { "query": "sözcü" },
+    { "query": "12380" }
+  ],
+  "output": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "frequency": { "type": "string" },
+        "polarization": { "type": "string" },
+        "symbolRate": { "type": "string" },
+        "fec": { "type": "string" },
+        "satellite": { "type": "string" }
+      }
+    }
+  },
+  "auth": "none",
+  "rateLimit": "~100k/day (Cloudflare Workers free tier)"
+}

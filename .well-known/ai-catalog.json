@@ -1,0 +1,42 @@
+{
+  "specVersion": "0.3",
+  "host": {
+    "name": "turksat.sercansolmaz.com",
+    "description": "Türksat 42° Doğu kanal frekansı arama aracı ve agent API'leri"
+  },
+  "entries": [
+    {
+      "urn": "urn:air:turksat.sercansolmaz.com:mcp:search-channel",
+      "displayName": "Türksat Kanal Frekans Sorgulama (MCP)",
+      "type": "application/json",
+      "url": "https://turksat-trends.sercansolmaz.workers.dev/mcp",
+      "representativeQueries": [
+        "show tv frekansı nedir",
+        "türksat sözcü kanalı hangi frekans",
+        "12380 ayarları sembol oranı",
+        "trt 1 hd hangi uydu"
+      ]
+    },
+    {
+      "urn": "urn:air:turksat.sercansolmaz.com:api:trending",
+      "displayName": "En Çok Aranan Frekanslar API",
+      "type": "application/json",
+      "url": "https://turksat-trends.sercansolmaz.workers.dev/top",
+      "representativeQueries": [
+        "türksat en çok aranan kanallar",
+        "popüler uydu frekans aramaları"
+      ]
+    },
+    {
+      "urn": "urn:air:turksat.sercansolmaz.com:content:homepage",
+      "displayName": "Türksat Kanal ve Frekans Bulucu (Web)",
+      "type": "text/html",
+      "url": "https://turksat.sercansolmaz.com/",
+      "representativeQueries": [
+        "türksat frekans listesi",
+        "kanal frekans bulma",
+        "türksat 42 doğu ayarları"
+      ]
+    }
+  ]
+}

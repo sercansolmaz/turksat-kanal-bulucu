@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/schema/2025-09-09/server-card.json",
+  "serverInfo": {
+    "name": "turksat-bulucu",
+    "version": "1.0.0",
+    "title": "Türksat Kanal ve Frekans Bulucu",
+    "description": "Türksat 42° Doğu kanal frekanslarını ada veya frekansa göre sorgulayan MCP sunucusu."
+  },
+  "transport": {
+    "type": "http",
+    "endpoint": "https://turksat-trends.sercansolmaz.workers.dev/mcp",
+    "security": { "type": "none" }
+  },
+  "capabilities": { "tools": { "listChanged": false } },
+  "tools": [
+    {
+      "name": "search_channel",
+      "description": "Kanal adı veya frekansla Türksat kanal ayarlarını bulur (frekans MHz, polarizasyon, sembol oranı, FEC, uydu).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Kanal adı (örn. 'Show TV', 'Sözcü') veya frekans (örn. '12380')" }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "trending",
+      "description": "Site ziyaretçilerinin en çok aradığı kanal terimlerini döner.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": { "type": "integer", "description": "Dönecek terim sayısı (varsayılan 10)" }
+        }
+      }
+    }
+  ],
+  "publishedAt": "2026-08-19T00:00:00Z"
+}
