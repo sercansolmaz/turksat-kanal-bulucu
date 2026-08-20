@@ -107,6 +107,12 @@ main { min-height: 100vh; overflow: hidden; }
 .copy-button { border: 1px solid var(--line); background: white; color: #4d627c; border-radius: 9px; padding: 7px 9px; font-size: 10px; font-weight: 800; }
 .copy-button:hover { border-color: var(--blue); color: var(--blue); }
 .frequency-line { display: flex; align-items: baseline; gap: 6px; margin: 12px 0 17px; }
+a.frequency-line { text-decoration: none; color: inherit; border-bottom: 2px solid transparent; border-radius: 10px; margin-left: -8px; padding: 6px 8px; transition: background .15s ease; }
+a.frequency-line:hover { background: var(--ice); }
+a.frequency-line:hover strong { color: var(--blue); }
+.freq-cta { display: inline-block; margin-left: auto; padding-left: 10px; color: #9db3cd; font-size: 9px; font-weight: 900; letter-spacing: .09em; white-space: nowrap; }
+a.frequency-line:hover .freq-cta { color: var(--blue); }
+.frequency-line .alternate ~ .freq-cta { display: none; }
 .frequency-line strong { font-size: 36px; line-height: 1; letter-spacing: -.04em; }
 .frequency-line > span:not(.alternate) { color: var(--muted); font-size: 12px; font-weight: 800; }
 .alternate { margin-left: auto; align-self: center; color: #617287; font-size: 9px; line-height: 1.2; text-align: right; }
@@ -501,14 +507,9 @@ footer p { margin: 0; max-width: 610px; }
       return '<button data-query="' + escapeHtml(item) + '">' + escapeHtml(item) + '</button>';
     }).join("");
 
-    const DETAIL_PAGES = {"a-haber":"A Haber","a-spor-hd":"A Spor HD","atv-hd":"ATV HD","bloomberg-ht-hd":"Bloomberg HT HD","cartoon-network":"Cartoon Network","cnn-turk-hd":"CNN Türk HD","disney-junior":"Disney Junior","diyanet-tv-hd":"Diyanet TV HD","eurosport-1":"Eurosport 1","eurosport-2-hd":"Eurosport 2 HD","flash-haber-hd":"Flash Haber HD","haberturk-hd":"Habertürk HD","halk-tv":"Halk TV","ht-spor":"HT Spor","kanal-d-hd":"Kanal D HD","kral-fm":"Kral FM","kral-pop":"Kral Pop","minika-cocuk":"Minika Çocuk","minika-go":"Minika GO","nat-geo-hd":"Nat Geo HD","now-hd":"NOW HD","ntv-hd":"NTV HD","show-tv-hd":"Show TV HD","space-toon-turkiye":"Space Toon Türkiye","star-tv-hd":"Star TV HD","tgrt-haber":"TGRT Haber","trt-1-hd":"TRT 1 HD","trt-3-spor":"TRT 3 Spor","trt-cocuk-hd":"TRT Çocuk HD","trt-spor-hd":"TRT Spor HD","trt-spor-yildiz":"TRT Spor Yıldız","tv-2-hd":"TV 2 HD","tv8-5-hd":"TV8.5 HD","tv8-hd":"TV8 HD","tv8-int-hd":"TV8 Int HD","ulke-tv-hd":"Ülke TV HD","dream-turk-hd":"Dream Türk HD"};
-
     function detailSlug(name) {
-      const n = normalize(name).replace(/ hd$| sd$/,"");
-      for (const slug in DETAIL_PAGES) {
-        if (normalize(DETAIL_PAGES[slug]).replace(/ hd$| sd$/,"") === n) return slug;
-      }
-      return null;
+      const n = normalize(name).replace(/ /g, "-");
+      return n || null;
     }
 
     function cardHtml(channel) {
@@ -523,13 +524,17 @@ footer p { margin: 0; max-width: 610px; }
       const detail = detailSlug(channel.name);
       const aka = channel.aka ? ' <span class="aka">(' + escapeHtml(channel.aka) + ')</span>' : "";
       const nameHtml = (detail ? '<a class="detail-link" href="/kanal/' + detail + '/">' + escapeHtml(channel.name) + '</a>' : escapeHtml(channel.name)) + aka;
+      const freqHref = detail ? '/kanal/' + detail + '/' : null;
+      const freqBlock = freqHref
+        ? '<a class="frequency-line freq-link" href="' + freqHref + '" title="' + escapeHtml(channel.name) + ' detay sayfası"><strong>' + escapeHtml(mux.frequency) + '</strong><span>MHz</span>' + alternate + '<span class="freq-cta">Detay ↗</span></a>'
+        : '<div class="frequency-line"><strong>' + escapeHtml(mux.frequency) + '</strong><span>MHz</span>' + alternate + '</div>';
       return '<article class="channel-card">' +
         '<div class="channel-top"><div><div class="badges">' +
         '<span class="type-badge ' + (isRadio ? "radio" : "") + '">' + escapeHtml(channel.type) + '</span>' + quality + network +
         '</div><h3>' + nameHtml + '</h3></div><div class="card-actions">' +
         '<button class="favorite-button ' + (favorite ? "active" : "") + '" data-favorite="' + channel.id + '" aria-label="' + escapeHtml(channel.name) + (favorite ? ' kanalını favorilerden çıkar' : ' kanalını favorilere ekle') + '" aria-pressed="' + favorite + '">' + (favorite ? "★" : "☆") + '</button>' +
         '<button class="copy-button" data-copy="' + channel.id + '" aria-label="' + escapeHtml(channel.name) + ' ayarlarını kopyala">' + (copied ? "Kopyalandı" : "Kopyala") + '</button></div></div>' +
-        '<div class="frequency-line"><strong>' + escapeHtml(mux.frequency) + '</strong><span>MHz</span>' + alternate + '</div>' +
+        freqBlock +
         '<dl class="setting-grid">' +
         '<div><dt>Polarizasyon</dt><dd><b>' + escapeHtml(mux.polarization) + '</b> · ' + polarization + '</dd></div>' +
         '<div><dt>Sembol oranı</dt><dd>' + escapeHtml(mux.symbolRate) + '</dd></div>' +
